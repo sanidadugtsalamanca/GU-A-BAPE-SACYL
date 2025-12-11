@@ -25,22 +25,422 @@
             }
         }
     </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    <script type="importmap">
+<script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@18.2.0",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "lucide-react": "https://esm.sh/lucide-react@0.344.0",
+    "react": "https://esm.sh/react@^19.2.1",
     "react-dom/": "https://esm.sh/react-dom@^19.2.1/",
-    "react/": "https://esm.sh/react@^19.2.1/"
+    "react/": "https://esm.sh/react@^19.2.1/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.560.0"
   }
 }
 </script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
-    <div id="root"></div>
-    <script type="module" src="./index.tsx"></script>
+
+    <!-- HEADER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo area -->
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-red-600 text-white font-black px-2 py-0.5 rounded text-sm tracking-wider">UGT</span>
+                        <h1 class="text-xl md:text-2xl font-bold text-slate-800 tracking-tight">
+                            Sanidad <span class="text-red-600">Salamanca</span>
+                        </h1>
+                    </div>
+                    <p class="text-xs text-slate-500 font-medium mt-0.5 tracking-wide">
+                        GUÍA INFORMATIVA BAPE SACYL
+                    </p>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex gap-2">
+                    <button data-tab="acceso" class="nav-btn active flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-200 font-medium bg-red-600 text-white shadow-md shadow-red-200">
+                        <i data-lucide="book-open" class="w-4 h-4"></i> Guía de Acceso
+                    </button>
+                    <button data-tab="puntuacion" class="nav-btn flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-200 font-medium bg-white text-slate-600 hover:bg-red-50 hover:text-red-600">
+                        <i data-lucide="calculator" class="w-4 h-4"></i> Simulador Puntos
+                    </button>
+                    <button data-tab="llamamientos" class="nav-btn flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-200 font-medium bg-white text-slate-600 hover:bg-red-50 hover:text-red-600">
+                        <i data-lucide="bell-ring" class="w-4 h-4"></i> Llamamientos
+                    </button>
+                    <button data-tab="penalizaciones" class="nav-btn flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-200 font-medium bg-white text-slate-600 hover:bg-red-50 hover:text-red-600">
+                        <i data-lucide="alert-octagon" class="w-4 h-4"></i> Penalizaciones
+                    </button>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 py-4 flex flex-col gap-2 shadow-lg">
+            <button data-tab="acceso" class="nav-btn-mobile w-full text-left flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-200 font-medium bg-red-600 text-white">
+                <i data-lucide="book-open" class="w-4 h-4"></i> Guía de Acceso
+            </button>
+            <button data-tab="puntuacion" class="nav-btn-mobile w-full text-left flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-200 font-medium bg-white text-slate-600">
+                <i data-lucide="calculator" class="w-4 h-4"></i> Simulador Puntos
+            </button>
+            <button data-tab="llamamientos" class="nav-btn-mobile w-full text-left flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-200 font-medium bg-white text-slate-600">
+                <i data-lucide="bell-ring" class="w-4 h-4"></i> Llamamientos
+            </button>
+            <button data-tab="penalizaciones" class="nav-btn-mobile w-full text-left flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-200 font-medium bg-white text-slate-600">
+                <i data-lucide="alert-octagon" class="w-4 h-4"></i> Penalizaciones
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[calc(100vh-400px)] w-full">
+        
+        <!-- TAB: ACCESO -->
+        <div id="view-acceso" class="tab-content active space-y-8 animate-fade-in max-w-5xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">¿Cómo inscribirse en la BAPE?</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">
+                    Sigue estos tres pasos fundamentales para formar parte de la Bolsa Abierta y Permanente de Empleo del SACYL.
+                </p>
+            </div>
+
+            <!-- Paso 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow duration-300 border-l-4 border-l-red-500">
+                <div class="bg-slate-50/50 p-6 border-b border-slate-100">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-3">
+                        <span class="text-red-600"><i data-lucide="user-plus" class="w-7 h-7"></i></span>
+                        Paso 1: Registro de Solicitante
+                    </h3>
+                    <p class="text-slate-500 text-sm mt-1">Alta inicial en la aplicación oficial</p>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <p class="text-slate-700 leading-relaxed">
+                            Si nunca has trabajado en SACYL o no tienes usuario, lo primero es darte de alta en la aplicación SELECTA.
+                        </p>
+                        <ul class="grid gap-3 sm:grid-cols-2 mt-4">
+                            <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg">
+                                <i data-lucide="mouse-pointer-click" class="w-5 h-5 text-red-500 shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-slate-700">Accede al portal de salud de Castilla y León.</span>
+                            </li>
+                            <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg">
+                                <i data-lucide="monitor" class="w-5 h-5 text-red-500 shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-slate-700">Regístrate con tu DNI y un correo electrónico válido.</span>
+                            </li>
+                        </ul>
+                        <div class="bg-yellow-50 border border-yellow-100 p-4 rounded-lg flex gap-3 mt-4">
+                            <i data-lucide="alert-circle" class="text-yellow-600 shrink-0"></i>
+                            <p class="text-sm text-yellow-800">
+                                <strong>Importante:</strong> Guarda bien tus claves. Las necesitarás para todo el proceso y futuros llamamientos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow duration-300 border-l-4 border-l-red-500">
+                <div class="bg-slate-50/50 p-6 border-b border-slate-100">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-3">
+                        <span class="text-red-600"><i data-lucide="upload" class="w-7 h-7"></i></span>
+                        Paso 2: Registro de Méritos
+                    </h3>
+                    <p class="text-slate-500 text-sm mt-1">Sube tu experiencia y formación</p>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <p class="text-slate-700">
+                            Antes de apuntarte a una lista concreta, debes cargar todos tus méritos en el sistema.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4 mt-2">
+                            <div class="border border-slate-200 rounded-lg p-4 hover:border-red-200 transition-colors">
+                                <h4 class="font-semibold text-slate-800 mb-2 flex items-center gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-green-600"></i> Experiencia Profesional
+                                </h4>
+                                <p class="text-sm text-slate-600">
+                                    Certificados de servicios prestados. Si es en SACYL, suelen cargarse de oficio (revísalo).
+                                </p>
+                            </div>
+                            <div class="border border-slate-200 rounded-lg p-4 hover:border-red-200 transition-colors">
+                                <h4 class="font-semibold text-slate-800 mb-2 flex items-center gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-green-600"></i> Formación
+                                </h4>
+                                <p class="text-sm text-slate-600">
+                                    Títulos académicos, cursos, formación continuada. Escanea los originales en PDF.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow duration-300 border-l-4 border-l-red-500">
+                <div class="bg-slate-50/50 p-6 border-b border-slate-100">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-3">
+                        <span class="text-red-600"><i data-lucide="file-check" class="w-7 h-7"></i></span>
+                        Paso 3: Inscripción y Autobaremo
+                    </h3>
+                    <p class="text-slate-500 text-sm mt-1">Formalización de la solicitud</p>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <p class="text-slate-700">
+                            Una vez cargados los méritos, debes inscribirte en la categoría y área de salud que desees.
+                        </p>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center gap-3 text-slate-700">
+                                <div class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold shrink-0">1</div>
+                                <p>Selecciona la categoría (ej: Enfermería, Celador, TCAE).</p>
+                            </div>
+                            <div class="flex items-center gap-3 text-slate-700">
+                                <div class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold shrink-0">2</div>
+                                <p>Elige las Áreas de Salud (Provincias) donde quieres trabajar.</p>
+                            </div>
+                            <div class="flex items-center gap-3 text-slate-700">
+                                <div class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold shrink-0">3</div>
+                                <p>Genera el <strong>Autobaremo</strong>: El sistema calculará tus puntos con los méritos subidos.</p>
+                            </div>
+                            <div class="flex items-center gap-3 text-slate-700">
+                                <div class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold shrink-0">4</div>
+                                <p><strong>Registra</strong> la solicitud electrónicamente.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Box -->
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 flex flex-col md:flex-row gap-6 items-center">
+                <div class="bg-blue-100 p-3 rounded-full shrink-0">
+                    <i data-lucide="calendar-clock" class="text-blue-600 w-8 h-8"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-blue-900 mb-1">¿Cuándo puedo apuntarme?</h3>
+                    <p class="text-blue-800/80 text-sm leading-relaxed">
+                        La bolsa es <strong>Abierta y Permanente</strong>. Puedes inscribirte cualquier día del año. Sin embargo, existen <strong>fechas de corte</strong> (normalmente anuales) para la valoración de méritos. Los méritos obtenidos después de la fecha de corte contarán para el año siguiente.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: PUNTUACION -->
+        <div id="view-puntuacion" class="tab-content hidden max-w-4xl mx-auto animate-fade-in space-y-6">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-900 mb-2">Simulador de Puntos</h2>
+                <p class="text-slate-600">Calcula una estimación rápida de tu puntuación para la bolsa.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- COLUMNA ENTRADA DE DATOS -->
+                <div class="space-y-6">
+                    <!-- Experiencia -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden h-full">
+                        <div class="bg-slate-50/50 p-6 border-b border-slate-100">
+                            <h3 class="text-xl font-bold text-slate-800 flex items-center gap-3">
+                                Experiencia Profesional
+                            </h3>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">
+                                    Meses trabajados en SNS (Público)
+                                </label>
+                                <div class="flex items-center gap-2">
+                                    <input type="number" id="input-sns" min="0" placeholder="0" class="calc-input w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all">
+                                    <span class="text-xs text-slate-500 font-mono bg-slate-100 px-2 py-1 rounded">x0.2</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">
+                                    Meses trabajados en Sector Privado/Otras
+                                </label>
+                                <div class="flex items-center gap-2">
+                                    <input type="number" id="input-privada" min="0" placeholder="0" class="calc-input w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all">
+                                    <span class="text-xs text-slate-500 font-mono bg-slate-100 px-2 py-1 rounded">x0.1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formación -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden h-full">
+                        <div class="bg-slate-50/50 p-6 border-b border-slate-100">
+                            <h3 class="text-xl font-bold text-slate-800 flex items-center gap-3">
+                                Formación Continuada
+                            </h3>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">
+                                    Créditos tradicionales
+                                </label>
+                                <input type="number" id="input-ord" min="0" placeholder="0" class="calc-input w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">
+                                    Créditos ECTS
+                                </label>
+                                <input type="number" id="input-ects" min="0" placeholder="0" class="calc-input w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMNA RESULTADOS -->
+                <div class="flex flex-col gap-6">
+                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-8 shadow-xl border-t-4 border-red-500 sticky top-24">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-3 bg-red-600 rounded-lg">
+                                <i data-lucide="calculator" class="text-white w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Puntuación Estimada</h3>
+                                <p class="text-red-200 text-sm">Resultado no vinculante</p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center py-8">
+                            <span id="score-total" class="text-7xl font-black tracking-tighter tabular-nums">0</span>
+                            <span class="text-xl font-medium text-slate-400 mt-2 ml-2">ptos</span>
+                        </div>
+
+                        <div class="space-y-3 border-t border-slate-700 pt-6">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-400">Por Experiencia:</span>
+                                <span id="score-exp" class="font-mono font-bold">0.00</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-400">Por Formación:</span>
+                                <span id="score-form" class="font-mono font-bold">0.00</span>
+                            </div>
+                        </div>
+
+                        <button id="btn-reset" class="w-full mt-8 bg-white/10 hover:bg-white/20 text-white py-3 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm font-medium cursor-pointer">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                            Reiniciar Calculadora
+                        </button>
+                    </div>
+
+                    <div class="bg-orange-50 p-4 rounded-xl border border-orange-100 flex gap-3">
+                        <i data-lucide="trophy" class="text-orange-500 shrink-0 w-5 h-5"></i>
+                        <p class="text-sm text-orange-800">
+                            <strong>Consejo UGT:</strong> Revisa siempre que tus cursos estén acreditados por la CFC (Comisión de Formación Continuada) para garantizar su validez.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: LLAMAMIENTOS (Placeholder) -->
+        <div id="view-llamamientos" class="tab-content hidden flex-col items-center justify-center py-20 text-slate-400">
+            <div class="bg-slate-100 p-6 rounded-full mb-4">
+                <i data-lucide="bell-ring" class="w-12 h-12"></i>
+            </div>
+            <p class="text-xl">Sección de Llamamientos en construcción</p>
+        </div>
+
+        <!-- TAB: PENALIZACIONES (Placeholder) -->
+        <div id="view-penalizaciones" class="tab-content hidden flex-col items-center justify-center py-20 text-slate-400">
+            <div class="bg-slate-100 p-6 rounded-full mb-4">
+                <i data-lucide="alert-octagon" class="w-12 h-12"></i>
+            </div>
+            <p class="text-xl">Sección de Penalizaciones en construcción</p>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white mt-auto border-t-4 border-red-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+                <!-- Branding Column -->
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="bg-white text-red-600 font-black px-3 py-1 rounded text-xl">UGT</div>
+                        <div class="font-bold text-2xl">Servicios Públicos</div>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Tu sindicato en el SACYL. Defendemos tus derechos, te informamos de los procesos y te ayudamos con tus trámites en la Bolsa de Empleo.
+                    </p>
+                    <div class="pt-4">
+                        <span class="inline-block bg-red-600/20 text-red-400 text-xs font-semibold px-3 py-1 rounded-full border border-red-600/30">
+                            Sección Sindical Salamanca
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Contact Info Column -->
+                <div class="lg:col-span-8 bg-slate-800/50 rounded-2xl p-6 md:p-8 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2 text-red-400">
+                        <i data-lucide="building-2" class="w-5 h-5"></i>
+                        Información de Contacto y Sede
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-10">
+                        <div class="flex gap-4">
+                            <div class="bg-slate-700 p-3 rounded-lg h-fit text-red-400 shrink-0">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-200">Visítanos</h4>
+                                <p class="text-slate-400 text-sm mt-1">
+                                    Edificio 1 del Hospital Virgen Vega<br/>
+                                    Semisótano (Sección Sindical UGT)
+                                </p>
+                                <p class="text-slate-500 text-xs mt-1">
+                                    P.º de San Vicente, 58, 182<br/>37007 Salamanca
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="bg-slate-700 p-3 rounded-lg h-fit text-red-400 shrink-0">
+                                    <i data-lucide="phone" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-200">Llámanos</h4>
+                                    <div class="text-slate-400 text-sm mt-1 flex flex-col gap-1">
+                                        <a href="tel:923291100" class="hover:text-white transition-colors">
+                                            Fijo: 923 29 11 00 <span class="text-slate-500">(Ext. 55598 HVV)</span>
+                                        </a>
+                                        <a href="tel:637585924" class="hover:text-white transition-colors font-medium">
+                                            Móvil: 637 585 924
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="bg-slate-700 p-3 rounded-lg h-fit text-red-400 shrink-0">
+                                    <i data-lucide="mail" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-200">Escríbenos</h4>
+                                    <a href="mailto:sanidad.salamanca@ugt-sp.ugt.org" class="text-slate-400 text-sm mt-1 hover:text-white break-all transition-colors block">
+                                        sanidad.salamanca@ugt-sp.ugt.org
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 mt-12 pt-8 text-center text-slate-500 text-xs">
+                © <span id="year"></span> UGT Servicios Públicos Salamanca. Guía no oficial para ayuda al afiliado.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
